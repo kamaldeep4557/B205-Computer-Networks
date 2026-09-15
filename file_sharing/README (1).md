@@ -2,9 +2,6 @@
 
 ## 1. Open Project Folder
 
-``` bat
-cd "C:\Users\Dell\Desktop\Optimum Workspace\2026\September\15-09-2026\SST10391\Work 1\Network Practicle\file_sharing"
-```
 
 ## 2. Start Server
 
