@@ -1,0 +1,67 @@
+2026-09-15 18:43:34,866 INFO Server started on 127.0.0.1:39799; waiting for connections
+2026-09-15 18:43:34,867 INFO Client connected: ('127.0.0.1', 43746)
+2026-09-15 18:43:34,990 INFO Registered user=Alice
+2026-09-15 18:43:35,123 INFO Login user=Alice
+2026-09-15 18:43:35,125 INFO Client connected: ('127.0.0.1', 43748)
+2026-09-15 18:43:35,234 INFO Registered user=Bob
+2026-09-15 18:43:35,346 INFO Login user=Bob
+2026-09-15 18:43:35,348 INFO Client connected: ('127.0.0.1', 43750)
+2026-09-15 18:43:35,465 INFO Registered user=Charlie
+2026-09-15 18:43:35,593 INFO Login user=Charlie
+2026-09-15 18:43:35,596 INFO Folder created user=Alice path=Documents/University/Networks
+2026-09-15 18:43:35,600 INFO UPLOAD_START user=Alice path=Documents/University/Networks/report.txt size=14800
+2026-09-15 18:43:35,602 INFO Transfer closed user=Alice mode=upload bytes=14800
+2026-09-15 18:43:35,602 INFO UPLOAD_COMPLETE user=Alice path=Documents/University/Networks/report.txt
+2026-09-15 18:43:35,809 INFO PROTECT user=Alice
+2026-09-15 18:43:35,810 WARNING Request rejected user=Charlie op=DOWNLOAD code=ACCESS_DENIED
+2026-09-15 18:43:35,927 WARNING Request rejected user=Charlie op=ACCESS code=ACCESS_DENIED
+2026-09-15 18:43:36,076 INFO ACCESS user=Charlie
+2026-09-15 18:43:36,079 INFO DOWNLOAD_START user=Charlie path=Documents/University/Networks/report.txt
+2026-09-15 18:43:36,083 INFO Transfer closed user=Charlie mode=download bytes=14800
+2026-09-15 18:43:36,084 INFO DOWNLOAD_COMPLETE user=Charlie
+2026-09-15 18:43:36,194 INFO ACCESS user=Bob
+2026-09-15 18:43:36,196 INFO DELETE_FILE user=Bob path=Documents/University/Networks/report.txt
+2026-09-15 18:43:36,201 INFO Connection ended user=Bob reason=OSError
+2026-09-15 18:43:36,203 INFO Client disconnected: Bob
+2026-09-15 18:43:36,203 INFO Connection ended user=Alice reason=OSError
+2026-09-15 18:43:36,205 INFO Client disconnected: Alice
+2026-09-15 18:43:36,206 INFO Connection ended user=Charlie reason=OSError
+2026-09-15 18:43:36,206 INFO Client disconnected: Charlie
+2026-09-15 18:43:36,207 INFO Server shutdown complete
+CONNECTED: ['Alice', 'Bob', 'Charlie']
+UPLOAD_START: 0/14800 bytes (0.0%)
+UPLOAD_PROGRESS: 4096/14800 bytes (27.7%)
+UPLOAD_PROGRESS: 8192/14800 bytes (55.4%)
+UPLOAD_PROGRESS: 12288/14800 bytes (83.0%)
+UPLOAD_PROGRESS: 14800/14800 bytes (100.0%)
+UPLOAD_COMPLETE: 14800/14800 bytes (100.0%)
+BOB RECEIVED: {'type': 'NOTIFICATION', 'event': 'FILE_UPLOADED', 'actor': 'Alice', 'path': 'Documents/University/Networks/report.txt', 'resource_id': 'a8cf029980a74fd2af24dd14fd14f60f'}
+CHARLIE RECEIVED: {'type': 'NOTIFICATION', 'event': 'FILE_UPLOADED', 'actor': 'Alice', 'path': 'Documents/University/Networks/report.txt', 'resource_id': 'a8cf029980a74fd2af24dd14fd14f60f'}
+CHARLIE SEARCH: [
+  {
+    "id": "a8cf029980a74fd2af24dd14fd14f60f",
+    "path": "Documents/University/Networks/report.txt",
+    "parent": "Documents/University/Networks",
+    "name": "report.txt",
+    "kind": "file",
+    "size": 14800,
+    "type": "text/plain",
+    "creation_time": "2026-09-15T16:43:35.599989+00:00",
+    "uploader": "Alice",
+    "sha256": "e093fe278108d5d251815620579e2fe031d07592cec6fcede2909bd617db4528",
+    "protected": false
+  }
+]
+UNAUTHORIZED DOWNLOAD: ACCESS_DENIED
+WRONG PASSWORD: ACCESS_DENIED
+DOWNLOAD_START: 0/14800 bytes (0.0%)
+DOWNLOAD_PROGRESS: 4096/14800 bytes (27.7%)
+DOWNLOAD_PROGRESS: 8192/14800 bytes (55.4%)
+DOWNLOAD_PROGRESS: 12288/14800 bytes (83.0%)
+DOWNLOAD_PROGRESS: 14800/14800 bytes (100.0%)
+DOWNLOAD_COMPLETE: 14800/14800 bytes (100.0%)
+DOWNLOAD VERIFIED: source and destination bytes match
+ALICE RECEIVED: {'type': 'NOTIFICATION', 'event': 'FILE_DELETED', 'actor': 'Bob', 'path': 'Documents/University/Networks/report.txt', 'resource_id': 'a8cf029980a74fd2af24dd14fd14f60f'}
+CHARLIE RECEIVED: {'type': 'NOTIFICATION', 'event': 'FILE_DELETED', 'actor': 'Bob', 'path': 'Documents/University/Networks/report.txt', 'resource_id': 'a8cf029980a74fd2af24dd14fd14f60f'}
+DELETION VERIFIED: no stale metadata
+DEMONSTRATION PASSED

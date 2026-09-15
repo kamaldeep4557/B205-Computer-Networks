@@ -1,0 +1,6 @@
+Computer Networks Practical — File Sharing Demonstration
+
+This sample file is transferred through a real TCP socket, using framed
+application messages and chunked file data. The server records its name,
+size, MIME type, UTC creation time, uploader, path and SHA-256 checksum.
+Other connected users receive an asynchronous upload notification.

@@ -1,0 +1,1602 @@
+I want you to BUILD A COMPLETE WORKING NETWORKED FILE-SHARING
+APPLICATION in Python.
+
+Do not give me only explanations, pseudocode, or a high-level plan.
+
+You need to actually create the complete practical application,
+including all required Python source files, configuration files,
+storage components, and tests.
+
+The application must be fully functional and runnable.
+
+============================================================
+1. TECHNOLOGY AND ARCHITECTURE
+============================================================
+
+Programming language:
+Python
+
+Architecture:
+Client-Server
+
+Networking:
+Python socket programming
+
+Use TCP sockets for the main communication and file-transfer layer.
+
+The core networking functionality must be implemented using Python's
+socket module.
+
+Do not use a framework that hides or replaces the core socket
+programming requirement.
+
+The application should consist of:
+
+1. A server application.
+2. A client application.
+3. Supporting modules for:
+   - networking;
+   - protocol handling;
+   - file management;
+   - folder management;
+   - metadata;
+   - users;
+   - access control;
+   - notifications;
+   - configuration;
+   - logging;
+   - error handling.
+
+The architecture must support at least three simultaneously connected
+users.
+
+============================================================
+2. MAIN APPLICATION OBJECTIVE
+============================================================
+
+Build a multi-user network file-sharing system.
+
+The server should act as the central point responsible for:
+
+- client connections;
+- user management;
+- file storage;
+- folder structure;
+- metadata;
+- file searching;
+- access control;
+- file transfers;
+- real-time notifications;
+- transfer status;
+- error handling.
+
+Clients should connect to the server through sockets and interact with
+the shared file system through the application's own communication
+protocol.
+
+The application should feel like a small practical file-sharing
+platform rather than a simple file-copy script.
+
+============================================================
+3. SOCKET COMMUNICATION
+============================================================
+
+Implement genuine socket programming.
+
+The server must:
+
+- create a socket;
+- bind to a configurable host and port;
+- listen for incoming connections;
+- accept clients;
+- communicate with clients;
+- handle disconnections;
+- close resources correctly.
+
+The client must:
+
+- create a socket;
+- connect to the server;
+- send requests;
+- receive responses;
+- handle connection failures;
+- close the connection correctly.
+
+The server must support multiple clients.
+
+Use appropriate concurrency, such as threads, so that one connected
+client does not block all other clients.
+
+The implementation must be able to demonstrate at least three clients
+working with the same server.
+
+============================================================
+4. CUSTOM APPLICATION PROTOCOL
+============================================================
+
+Create a clear application-level protocol operating over the socket
+connection.
+
+Do not simply send arbitrary strings throughout the application.
+
+Create structured messages for operations.
+
+The protocol should support operations such as:
+
+- CONNECT
+- LOGIN
+- REGISTER if authentication is implemented
+- LIST
+- SEARCH
+- UPLOAD
+- DOWNLOAD
+- DELETE_FILE
+- CREATE_FOLDER
+- DELETE_FOLDER
+- PROTECT
+- ACCESS
+- STATUS
+- NOTIFICATION
+- ERROR
+- DISCONNECT
+
+You may use different names if your protocol design is better.
+
+Every message must have a clear structure.
+
+Define:
+
+- message type;
+- required parameters;
+- optional parameters;
+- response;
+- error response.
+
+Use a reliable message-framing mechanism.
+
+Remember that TCP provides a byte stream and does not preserve
+application-level message boundaries.
+
+The implementation must correctly deal with partial reads and writes.
+
+============================================================
+5. MULTI-USER FUNCTIONALITY
+============================================================
+
+Support at least three users.
+
+Each user must have a unique username.
+
+The system should keep track of connected clients.
+
+For example:
+
+User A
+User B
+User C
+
+All three should be able to connect to the same server.
+
+The server must be able to determine which user is performing each
+operation.
+
+If authentication is implemented, create a sensible login/registration
+mechanism.
+
+If authentication is not required for the chosen design, still ensure
+that unique usernames are enforced and associated with operations.
+
+Handle duplicate usernames correctly.
+
+Do not use hard-coded fake users as the only implementation.
+
+============================================================
+6. FILE UPLOAD
+============================================================
+
+Implement real file uploading over the network.
+
+A client must be able to:
+
+1. Select a local file.
+2. Choose a destination folder.
+3. Send an upload request.
+4. Send file information.
+5. Transfer the actual file through the socket.
+6. Have the server receive the data.
+7. Store the file.
+8. Create its metadata.
+9. Return the upload result.
+
+Files must be transferred in chunks.
+
+Do not unnecessarily load an entire large file into memory.
+
+The upload should show actual transfer progress.
+
+Progress must be calculated from real bytes transferred.
+
+For example:
+
+Uploading report.pdf
+[==============------] 72%
+Transferred: 7.2 MB / 10 MB
+
+Do not create fake progress using only a timer.
+
+Handle:
+
+- file not found;
+- duplicate filename;
+- invalid destination;
+- connection failure;
+- interrupted upload;
+- server storage error;
+- invalid request.
+
+============================================================
+7. FILE DOWNLOAD
+============================================================
+
+Implement real file downloading over the network.
+
+A client must be able to:
+
+1. Select/request a file.
+2. Send a download request.
+3. Have the server locate the file.
+4. Check access permissions.
+5. Send the file.
+6. Receive it on the client.
+7. Save it locally.
+8. Show actual download progress.
+9. Confirm completion.
+
+Use chunked transfer.
+
+Example:
+
+Downloading report.pdf
+[================--] 88%
+Transferred: 8.8 MB / 10 MB
+
+The progress must represent the actual transfer.
+
+Handle:
+
+- file does not exist;
+- access denied;
+- incorrect password;
+- disconnected client;
+- invalid destination;
+- incomplete transfer;
+- server error.
+
+============================================================
+8. FILE SEARCH
+============================================================
+
+Implement real search functionality.
+
+Users must be able to search the files stored on the server.
+
+Search should support useful fields such as:
+
+- filename;
+- file type;
+- uploader;
+- folder;
+- metadata.
+
+Search results should return actual information about matching files.
+
+For example:
+
+File:
+report.pdf
+
+Size:
+245 KB
+
+Type:
+PDF
+
+Created:
+2026-09-15 18:30
+
+Uploader:
+Alice
+
+Folder:
+Documents/Networks
+
+Do not hard-code search results.
+
+The search must query the actual stored metadata.
+
+============================================================
+9. FILE METADATA
+============================================================
+
+Every uploaded file must have metadata.
+
+At minimum store:
+
+- file name;
+- file size;
+- file type;
+- creation time;
+- uploader username.
+
+Also store useful information such as:
+
+- unique file identifier;
+- folder/path;
+- protection status;
+- storage location if required by the implementation.
+
+Metadata must be:
+
+1. Created when the file is uploaded.
+2. Stored persistently.
+3. Retrieved when required.
+4. Sent to clients where appropriate.
+5. Searchable.
+
+Use an appropriate local metadata store.
+
+SQLite is acceptable for metadata management if it is used only for
+data management and does not replace the required socket programming.
+
+============================================================
+10. FOLDER SYSTEM
+============================================================
+
+Implement a complete folder hierarchy.
+
+Users must be able to:
+
+- create folders;
+- enter folders;
+- list folders;
+- upload files into folders;
+- delete folders where permitted;
+- create nested folders recursively.
+
+The system must support structures such as:
+
+Shared/
+    Documents/
+        University/
+            Networks/
+                report.pdf
+                notes.txt
+        Projects/
+            project.zip
+    Images/
+        photo.jpg
+
+There must be no artificial one-level limitation.
+
+============================================================
+11. UNIQUE FILE AND FOLDER NAMES
+============================================================
+
+Each folder must enforce unique names.
+
+For example:
+
+Documents/
+    report.pdf
+    report.pdf
+
+must be rejected.
+
+Likewise:
+
+Documents/
+    Networks/
+    Networks/
+
+must be rejected.
+
+Return a clear error to the client.
+
+The same filename may exist in separate folders because the full
+resource path is different.
+
+Ensure the implementation correctly handles this.
+
+============================================================
+12. FILE DELETION
+============================================================
+
+Implement file deletion.
+
+A user should be able to request deletion of a file.
+
+The server must:
+
+1. Validate the request.
+2. Check whether the file exists.
+3. Check access permissions.
+4. Delete the actual file.
+5. Update/delete its metadata.
+6. Return a result.
+7. Notify other connected clients.
+
+If the file does not exist, return an appropriate error.
+
+Do not leave stale metadata after successful deletion.
+
+============================================================
+13. FOLDER DELETION
+============================================================
+
+Implement appropriate folder deletion.
+
+Before deleting a folder, handle its contents safely.
+
+Decide and implement a clear behaviour for:
+
+- empty folders;
+- non-empty folders;
+- protected folders;
+- unauthorised users.
+
+Do not accidentally delete data outside the server storage directory.
+
+============================================================
+14. PASSWORD-PROTECTED FILES
+============================================================
+
+Allow users to protect uploaded files with a password.
+
+A protected file must require successful password verification before
+access.
+
+Example:
+
+User requests:
+download secret.pdf
+
+Server:
+This resource is protected.
+
+Client:
+Enter password:
+
+Server:
+Password verified.
+
+Server:
+Begin transfer.
+
+Incorrect passwords must result in access denial.
+
+Passwords must not be stored as plaintext.
+
+Use a secure password hashing mechanism from the Python standard
+library where practical.
+
+Never print passwords in logs.
+
+============================================================
+15. PASSWORD-PROTECTED FOLDERS
+============================================================
+
+Support password protection for folders as well.
+
+If a folder is protected, users should not be able to freely access
+its contents without passing the access check.
+
+Ensure the access-control logic works recursively where appropriate.
+
+For example:
+
+Private/
+    University/
+        Networks/
+            report.pdf
+
+If Private/ is protected, access to its contents must be controlled.
+
+Implement a consistent access-control model and document it in code
+comments where the logic is not obvious.
+
+============================================================
+16. ACCESS CONTROL
+============================================================
+
+Every operation involving a resource should consider access rights.
+
+Examples:
+
+- public file;
+- protected file;
+- public folder;
+- protected folder.
+
+The server must enforce access control.
+
+Do not rely only on the client interface.
+
+A malicious client should not be able to bypass the client UI simply by
+sending a different socket command.
+
+The server must validate permissions.
+
+============================================================
+17. REAL-TIME NOTIFICATIONS
+============================================================
+
+Implement genuine real-time updates.
+
+When a user uploads a file, other connected clients should receive an
+appropriate notification.
+
+Example:
+
+[NOTIFICATION]
+Alice uploaded report.pdf to Documents/Networks
+
+When a user deletes a file:
+
+[NOTIFICATION]
+Bob deleted report.pdf
+
+Notifications should be generated by the server.
+
+The server should distribute relevant events to connected clients.
+
+Do not require users to manually refresh the application to see every
+change.
+
+Design the communication carefully so that normal responses and
+asynchronous notifications can be distinguished.
+
+============================================================
+18. UPLOAD STATUS
+============================================================
+
+During an upload, provide meaningful status updates.
+
+For example:
+
+UPLOAD_START
+UPLOAD_PROGRESS
+UPLOAD_COMPLETE
+
+The client should be able to display:
+
+Uploading: report.pdf
+Progress: 45%
+Bytes: 4.5 MB / 10 MB
+
+The status should correspond to actual network transfer.
+
+============================================================
+19. DOWNLOAD STATUS
+============================================================
+
+Implement equivalent download status.
+
+For example:
+
+DOWNLOAD_START
+DOWNLOAD_PROGRESS
+DOWNLOAD_COMPLETE
+
+Display meaningful progress based on actual transferred bytes.
+
+============================================================
+20. REAL-TIME EVENT DESIGN
+============================================================
+
+Design a mechanism for asynchronous server events.
+
+The server may maintain a collection of active client connections.
+
+When an event occurs:
+
+1. Operation is performed.
+2. Server updates its state.
+3. Server generates an event.
+4. Event is sent to relevant clients.
+5. Clients display the notification.
+
+Ensure that sending a notification to one client does not crash the
+server if another client has disconnected.
+
+Clean up dead connections safely.
+
+============================================================
+21. PATH SECURITY
+============================================================
+
+Protect the server's storage directory.
+
+Prevent path traversal.
+
+A client must not be able to request arbitrary filesystem paths such
+as:
+
+../../secret.txt
+
+or:
+
+../../../private_data
+
+All client-supplied paths must be validated and resolved inside the
+designated storage directory.
+
+Do not allow users to manipulate arbitrary server filesystem paths.
+
+============================================================
+22. INPUT VALIDATION
+============================================================
+
+Validate all important client input.
+
+Check:
+
+- usernames;
+- filenames;
+- folder names;
+- paths;
+- commands;
+- message types;
+- metadata;
+- passwords;
+- file sizes;
+- identifiers.
+
+Malformed requests should result in an ERROR response rather than a
+server crash.
+
+============================================================
+23. CONCURRENCY
+============================================================
+
+The application must support multiple clients.
+
+Implement an appropriate concurrency strategy.
+
+A reasonable approach may involve:
+
+Main server
+    |
+    +-- Client Handler 1
+    |
+    +-- Client Handler 2
+    |
+    +-- Client Handler 3
+
+Use threads or another appropriate standard Python mechanism.
+
+Be careful with shared state.
+
+Shared resources may include:
+
+- connected clients;
+- metadata;
+- file system state;
+- user information;
+- notification lists.
+
+Prevent race conditions where multiple users modify shared resources.
+
+For example, two clients should not both successfully create the same
+filename in the same folder at exactly the same time.
+
+Use appropriate locks or other synchronization where necessary.
+
+============================================================
+24. METADATA STORAGE
+============================================================
+
+Use a persistent metadata system.
+
+SQLite is recommended if appropriate.
+
+Store information such as:
+
+id
+name
+path
+size
+type
+creation_time
+uploader
+protected
+password_hash
+
+Design the metadata schema sensibly.
+
+Ensure that file-system changes and metadata changes remain consistent.
+
+For example:
+
+If a file is deleted successfully,
+its corresponding metadata should also be removed.
+
+If an upload fails,
+incomplete metadata should not remain as though the upload succeeded.
+
+============================================================
+25. CONFIGURATION
+============================================================
+
+Create a configuration file.
+
+Configuration should include values such as:
+
+- server host;
+- server port;
+- storage directory;
+- metadata database;
+- client download directory;
+- logging configuration;
+- transfer chunk size;
+- optional limits.
+
+Do not hard-code these values throughout the application.
+
+Use a clear configuration mechanism.
+
+Provide sensible defaults.
+
+============================================================
+26. LOGGING
+============================================================
+
+Implement proper Python logging.
+
+Log important events including:
+
+- server startup;
+- server shutdown;
+- client connection;
+- client disconnection;
+- user activity;
+- upload;
+- download;
+- deletion;
+- folder creation;
+- access denial;
+- errors;
+- protocol errors.
+
+Use suitable logging levels.
+
+Do not log plaintext passwords.
+
+Do not expose sensitive information unnecessarily.
+
+Logs should be useful for debugging.
+
+============================================================
+27. ERROR HANDLING
+============================================================
+
+The server must be robust.
+
+It must not crash because one client sends an invalid request or
+disconnects unexpectedly.
+
+Handle:
+
+- socket errors;
+- connection reset;
+- timeout;
+- malformed messages;
+- missing files;
+- duplicate names;
+- invalid folders;
+- access denied;
+- wrong password;
+- storage errors;
+- database errors;
+- interrupted transfers;
+- invalid commands.
+
+Return structured error responses.
+
+Example:
+
+{
+    "type": "ERROR",
+    "code": "FILE_NOT_FOUND",
+    "message": "The requested file does not exist."
+}
+
+Use your own final protocol structure if more appropriate.
+
+============================================================
+28. CLIENT INTERFACE
+============================================================
+
+Create a practical console-based client unless a GUI is genuinely
+useful.
+
+The console interface should be simple and easy to demonstrate.
+
+Provide commands/menu options for:
+
+1. Connect
+2. Login/register if implemented
+3. List
+4. Search
+5. Upload
+6. Download
+7. Create folder
+8. Navigate folder
+9. Delete file
+10. Delete folder
+11. Protect resource
+12. Access protected resource
+13. Show notifications
+14. Exit
+
+Display clear messages.
+
+Example:
+
+Connected to server.
+
+Logged in as: Alice
+
+Current folder: /Documents/Networks
+
+Available commands:
+1. list
+2. search
+3. upload
+4. download
+5. mkdir
+6. delete
+7. protect
+8. exit
+
+============================================================
+29. SERVER INTERFACE
+============================================================
+
+The server should provide useful console output.
+
+Example:
+
+Server started on 127.0.0.1:5000
+
+Waiting for connections...
+
+Client connected:
+Alice - 127.0.0.1:54321
+
+Upload started:
+report.pdf
+
+Upload completed:
+report.pdf - 245 KB
+
+Client disconnected:
+Alice
+
+Do not expose passwords or sensitive information.
+
+============================================================
+30. FILE STORAGE
+============================================================
+
+Create a dedicated server-side storage directory.
+
+All user files must be stored inside this controlled directory.
+
+Do not mix application source code with user-uploaded files.
+
+The folder hierarchy visible to users should correspond sensibly to the
+physical storage structure.
+
+Handle filenames safely.
+
+Avoid collisions and accidental overwriting.
+
+============================================================
+31. RESOURCE IDENTIFICATION
+============================================================
+
+Use reliable identifiers for resources where useful.
+
+A file can have:
+
+- unique ID;
+- name;
+- folder;
+- path.
+
+Do not rely on filenames alone if this creates ambiguity.
+
+Make sure the protocol can unambiguously identify the requested
+resource.
+
+============================================================
+32. FILE TYPE DETECTION
+============================================================
+
+Determine file type from the actual file information where practical.
+
+Use appropriate Python standard-library functionality such as
+mimetypes where useful.
+
+Store the detected type in metadata.
+
+Do not invent file types.
+
+============================================================
+33. CREATION TIME
+============================================================
+
+Store the creation/upload time associated with each file.
+
+Use a consistent timestamp format.
+
+Make sure the value can be returned through the application and used
+in search/listing where appropriate.
+
+============================================================
+34. LISTING
+============================================================
+
+Implement directory listing.
+
+When a client requests a folder listing, return useful information
+about its contents.
+
+For files, display information such as:
+
+Name
+Type
+Size
+Creation time
+Uploader
+Protection status
+
+For folders, show folder names and relevant protection information.
+
+============================================================
+35. SEARCH RESULTS
+============================================================
+
+Search results should be easy to read.
+
+Example:
+
+Search: report
+
+1. report.pdf
+   Type: application/pdf
+   Size: 245 KB
+   Uploader: Alice
+   Created: 2026-09-15 18:30
+   Path: Documents/Networks
+   Protected: No
+
+2. final_report.docx
+   Type: application/vnd.openxmlformats...
+   Size: 1.2 MB
+   Uploader: Bob
+   Created: 2026-09-14 16:20
+   Path: Documents
+   Protected: Yes
+
+============================================================
+36. PROTOCOL MESSAGE FRAMING
+============================================================
+
+This is an important networking requirement.
+
+Do not assume one recv() call equals one complete message.
+
+Implement a clear framing approach.
+
+For example, you may use:
+
+[length][message]
+
+or another well-designed mechanism.
+
+JSON can be used for control messages if appropriate, while raw binary
+chunks can be used for file contents.
+
+Clearly separate control messages from file data.
+
+Ensure that large messages and partial network transmissions are handled
+correctly.
+
+============================================================
+37. FILE TRANSFER CHUNKING
+============================================================
+
+Transfer files in manageable chunks.
+
+For example:
+
+read chunk
+    ↓
+send chunk
+    ↓
+receive acknowledgement/status if required
+    ↓
+repeat
+    ↓
+complete
+
+Do not unnecessarily read a complete large file into RAM.
+
+Use a configurable chunk size.
+
+Make the transfer protocol robust.
+
+============================================================
+38. INTERRUPTED TRANSFERS
+============================================================
+
+Handle interrupted uploads/downloads.
+
+If a client disconnects during an upload:
+
+- detect the failure;
+- close the incomplete transfer;
+- clean up partial data;
+- avoid reporting success;
+- log the event.
+
+Similarly, handle interrupted downloads.
+
+Do not leave misleading metadata claiming a failed upload succeeded.
+
+============================================================
+39. SERVER STATE
+============================================================
+
+Maintain appropriate server-side state.
+
+The server may need to track:
+
+- connected clients;
+- usernames;
+- current folders;
+- active transfers;
+- permissions;
+- resources.
+
+Keep shared state organised.
+
+Avoid unnecessary global variables.
+
+Use classes or well-structured modules where appropriate.
+
+============================================================
+40. CODE ORGANISATION
+============================================================
+
+Create a clean modular Python project.
+
+A possible structure is:
+
+project/
+│
+├── server/
+│   ├── __init__.py
+│   ├── server.py
+│   ├── client_handler.py
+│   ├── file_manager.py
+│   ├── metadata_manager.py
+│   ├── user_manager.py
+│   ├── access_control.py
+│   └── notification_manager.py
+│
+├── client/
+│   ├── __init__.py
+│   ├── client.py
+│   ├── interface.py
+│   └── transfer.py
+│
+├── common/
+│   ├── protocol.py
+│   ├── networking.py
+│   └── utilities.py
+│
+├── config/
+│   └── config.json
+│
+├── storage/
+│
+├── data/
+│
+├── logs/
+│
+├── tests/
+│
+└── README.md
+
+This is a suggested structure, not a mandatory one.
+
+Use the structure that best fits the actual implementation.
+
+Do not unnecessarily split tiny pieces of code into dozens of files.
+
+============================================================
+41. DEPENDENCIES
+============================================================
+
+Prefer the Python standard library.
+
+The core system should primarily use:
+
+socket
+threading
+json
+sqlite3
+pathlib
+os
+logging
+hashlib
+secrets
+datetime
+mimetypes
+uuid
+time
+argparse
+shutil
+
+Only use third-party packages if genuinely necessary.
+
+Do not use a third-party library that provides the core file-sharing
+or socket functionality for us.
+
+============================================================
+42. SECURITY DESIGN
+============================================================
+
+Implement sensible security protections.
+
+At minimum:
+
+- password hashing;
+- access validation;
+- path traversal prevention;
+- input validation;
+- safe filesystem operations;
+- controlled storage;
+- no plaintext passwords in logs.
+
+Use secure random salt generation where appropriate.
+
+Do not claim that the system provides encryption unless encryption is
+actually implemented.
+
+Be honest about security limitations.
+
+============================================================
+43. SERVER STARTUP
+============================================================
+
+The server should start cleanly.
+
+Example:
+
+python server.py
+
+or an equivalent command based on the final structure.
+
+On startup:
+
+- load configuration;
+- initialise storage;
+- initialise metadata;
+- initialise logging;
+- create socket;
+- bind;
+- listen;
+- begin accepting clients.
+
+If required directories/database tables do not exist, initialise them
+automatically.
+
+============================================================
+44. CLIENT STARTUP
+============================================================
+
+The client should start cleanly.
+
+Example:
+
+python client.py
+
+or an equivalent command.
+
+The client should:
+
+- load configuration;
+- connect to server;
+- identify user;
+- display the interface;
+- handle commands;
+- receive responses;
+- receive asynchronous notifications.
+
+============================================================
+45. AUTOMATIC INITIALISATION
+============================================================
+
+Where practical, initialise:
+
+- storage directory;
+- metadata database;
+- required tables;
+- logs;
+- configuration defaults.
+
+The user should not need to manually create ten directories before
+running the program.
+
+============================================================
+46. TESTING
+============================================================
+
+Create actual tests.
+
+Do not simply write a test document.
+
+Test the real implementation.
+
+At minimum test:
+
+1. Server startup
+2. Client connection
+3. Three clients
+4. Unique usernames
+5. Upload
+6. Download
+7. Search
+8. Metadata
+9. File deletion
+10. Folder creation
+11. Nested folders
+12. Duplicate file name
+13. Duplicate folder name
+14. Protected file
+15. Protected folder
+16. Incorrect password
+17. Unauthorised access
+18. Real-time upload notification
+19. Real-time deletion notification
+20. Upload progress
+21. Download progress
+22. Invalid command
+23. Missing file
+24. Missing folder
+25. Client disconnection
+26. Simultaneous operations
+27. Network interruption
+28. Path traversal
+29. Logging
+30. Configuration
+
+Use automated tests where practical and manual integration tests for
+network interactions where appropriate.
+
+Do not fabricate results.
+
+============================================================
+47. TEST WITH THREE USERS
+============================================================
+
+Perform a realistic multi-user scenario.
+
+Example:
+
+CLIENT 1 = Alice
+CLIENT 2 = Bob
+CLIENT 3 = Charlie
+
+Alice uploads:
+
+Documents/report.pdf
+
+Bob receives the notification.
+
+Charlie searches for:
+
+report
+
+Charlie sees the metadata.
+
+Bob creates:
+
+Projects/
+
+Alice uploads:
+
+Projects/project.zip
+
+Charlie downloads it.
+
+Then Bob deletes a file.
+
+Alice and Charlie receive the deletion notification.
+
+Test protected resources as well.
+
+============================================================
+48. DEMONSTRATION SCENARIO
+============================================================
+
+The application should be designed so that the main features can be
+demonstrated quickly.
+
+Create a practical demonstration flow:
+
+1. Start server.
+2. Start Client 1.
+3. Start Client 2.
+4. Start Client 3.
+5. Connect users.
+6. Create a folder.
+7. Upload a file.
+8. Show upload progress.
+9. Show real-time notification.
+10. Display metadata.
+11. Search for the file.
+12. Protect a resource.
+13. Attempt unauthorised access.
+14. Enter correct password.
+15. Download the file.
+16. Show download progress.
+17. Delete the file.
+18. Show deletion notification.
+
+The application should be stable enough that this sequence can be
+performed without restarting everything between every operation.
+
+============================================================
+49. NETWORKING QUALITY
+============================================================
+
+The implementation should demonstrate actual networking concepts.
+
+Make sure I can see and explain:
+
+- socket creation;
+- client-server connection;
+- TCP communication;
+- application-level messages;
+- message framing;
+- concurrent connections;
+- file data transmission;
+- asynchronous notifications;
+- connection termination;
+- network error handling.
+
+Do not turn the project into a simple local filesystem application
+with networking added superficially.
+
+============================================================
+50. PERFORMANCE AND RESOURCE MANAGEMENT
+============================================================
+
+Use streaming/chunking for file transfers.
+
+Avoid:
+
+- loading huge files entirely into memory;
+- creating unnecessary copies;
+- keeping closed client sockets;
+- leaving file handles open;
+- leaving database connections open;
+- excessive polling.
+
+Clean up resources properly.
+
+============================================================
+51. FINAL QUALITY REQUIREMENTS
+============================================================
+
+The final application must be:
+
+- functional;
+- stable;
+- modular;
+- readable;
+- understandable;
+- properly error-handled;
+- multi-user;
+- socket-based;
+- networked;
+- secure enough for the project scope;
+- easy to run;
+- easy to demonstrate.
+
+Do not add unnecessary features merely to make the project larger.
+
+Prioritise completing every required practical feature correctly.
+
+============================================================
+52. DEVELOPMENT APPROACH
+============================================================
+
+Build the application in stages.
+
+FIRST:
+Analyse the complete requirements.
+
+SECOND:
+Design the architecture.
+
+THIRD:
+Design the application protocol.
+
+FOURTH:
+Create the project structure.
+
+FIFTH:
+Implement basic socket communication.
+
+SIXTH:
+Implement concurrent clients.
+
+SEVENTH:
+Implement users.
+
+EIGHTH:
+Implement file/folder management.
+
+NINTH:
+Implement metadata.
+
+TENTH:
+Implement upload.
+
+ELEVENTH:
+Implement download.
+
+TWELFTH:
+Implement search.
+
+THIRTEENTH:
+Implement access control.
+
+FOURTEENTH:
+Implement real-time notifications.
+
+FIFTEENTH:
+Implement transfer progress.
+
+SIXTEENTH:
+Implement error handling.
+
+SEVENTEENTH:
+Implement logging.
+
+EIGHTEENTH:
+Implement configuration.
+
+NINETEENTH:
+Perform integration testing.
+
+TWENTIETH:
+Fix all discovered bugs.
+
+Do not rush through all stages without testing.
+
+============================================================
+53. DEBUGGING RULE
+============================================================
+
+If something fails:
+
+1. Reproduce the problem.
+2. Identify the root cause.
+3. Fix the underlying issue.
+4. Re-run the affected test.
+5. Check that the fix did not break another feature.
+
+Do not hide exceptions simply with broad:
+
+except:
+    pass
+
+Do not suppress important errors.
+
+============================================================
+54. FINAL REQUIREMENT AUDIT
+============================================================
+
+Before considering the application complete, verify every requirement:
+
+[ ] Python
+[ ] Client-server architecture
+[ ] Socket programming
+[ ] TCP communication
+[ ] At least three users
+[ ] Multiple simultaneous clients
+[ ] Unique usernames
+[ ] File upload
+[ ] File download
+[ ] File search
+[ ] File deletion
+[ ] File metadata
+[ ] File size
+[ ] File type
+[ ] Creation time
+[ ] Uploader username
+[ ] Metadata storage
+[ ] Metadata delivery
+[ ] Metadata search
+[ ] File creation
+[ ] Folder creation
+[ ] Recursive folders
+[ ] Unique file names within folders
+[ ] Unique folder names within folders
+[ ] Password-protected files
+[ ] Password-protected folders
+[ ] Secure password handling
+[ ] Access control
+[ ] Real-time new-file notifications
+[ ] Real-time deletion notifications
+[ ] Upload status
+[ ] Download status
+[ ] Actual transfer progress
+[ ] Custom application protocol
+[ ] Message framing
+[ ] Concurrent clients
+[ ] Error handling
+[ ] Logging
+[ ] Configuration
+[ ] Input validation
+[ ] Path traversal protection
+[ ] Chunked file transfer
+[ ] Interrupted-transfer handling
+[ ] Persistent metadata
+[ ] Client interface
+[ ] Server interface
+[ ] Automated/manual testing
+[ ] Three-user integration test
+
+============================================================
+55. FINAL OUTPUT FROM YOU
+============================================================
+
+When development is complete, provide:
+
+1. The complete project structure.
+2. All source files.
+3. Configuration files.
+4. Database/metadata implementation.
+5. Test files.
+6. Setup instructions.
+7. Run instructions.
+8. Available client commands.
+9. Application protocol summary.
+10. Test results based ONLY on tests actually executed.
+11. A complete requirement checklist showing where every requirement
+    is implemented.
+12. Any known limitations or remaining issues.
+
+Most importantly:
+
+THE CODE, PROTOCOL, FILE SYSTEM, METADATA, ACCESS CONTROL,
+NOTIFICATION SYSTEM AND CLIENT INTERFACE MUST ALL WORK TOGETHER AS
+ONE COHERENT APPLICATION.
+
+Do not provide disconnected example snippets.
+
+Build one complete integrated application.
+
+If you make a design decision, keep that decision consistent throughout
+the implementation.
+
+If a requirement is not yet implemented, do not claim that it is
+complete. Identify it and implement it before declaring the project
+finished.

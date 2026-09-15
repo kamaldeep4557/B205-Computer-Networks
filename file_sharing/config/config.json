@@ -1,0 +1,8 @@
+{
+  "host": "127.0.0.1", "port": 5000,
+  "storage_dir": "storage", "database": "data/metadata.sqlite3",
+  "download_dir": "downloads", "log_file": "logs/server.log",
+  "log_level": "INFO", "chunk_size": 65536,
+  "max_file_size": 1073741824, "socket_timeout": 120,
+  "max_clients": 64, "max_resources": 10000
+}

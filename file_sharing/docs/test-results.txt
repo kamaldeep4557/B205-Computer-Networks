@@ -1,0 +1,51 @@
+test_44_console_end_to_end (test_console.ConsoleTests.test_44_console_end_to_end) ... ok
+test_37_fragmented_coalesced_frames (test_system.FramingPersistenceTests.test_37_fragmented_coalesced_frames) ... ok
+test_38_persistent_restart (test_system.FramingPersistenceTests.test_38_persistent_restart) ... ok
+test_39_recover_interrupted_intents (test_system.FramingPersistenceTests.test_39_recover_interrupted_intents) ... 2026-09-15 18:44:51,658 WARNING Recovered interrupted resource operation id=93f747d9fbb245cba36b25ae4aaf27a8
+2026-09-15 18:44:51,658 WARNING Recovered interrupted resource operation id=4740aa20f98b4866bf1b4b68fd94e3fb
+ok
+test_40_connection_failure (test_system.FramingPersistenceTests.test_40_connection_failure) ... ok
+test_01_server_connection_three_users (test_system.NetworkTests.test_01_server_connection_three_users) ... ok
+test_02_unique_users_and_sessions (test_system.NetworkTests.test_02_unique_users_and_sessions) ... ok
+test_03_upload_metadata (test_system.NetworkTests.test_03_upload_metadata) ... ok
+test_04_download_integrity (test_system.NetworkTests.test_04_download_integrity) ... ok
+test_05_search_metadata_filters (test_system.NetworkTests.test_05_search_metadata_filters) ... ok
+test_06_delete_storage_and_metadata (test_system.NetworkTests.test_06_delete_storage_and_metadata) ... ok
+test_07_nested_folders (test_system.NetworkTests.test_07_nested_folders) ... ok
+test_08_duplicate_file_folder_names (test_system.NetworkTests.test_08_duplicate_file_folder_names) ... ok
+test_09_same_filename_different_folders (test_system.NetworkTests.test_09_same_filename_different_folders) ... ok
+test_10_protected_file_passwords (test_system.NetworkTests.test_10_protected_file_passwords) ... ok
+test_11_recursive_folder_acl (test_system.NetworkTests.test_11_recursive_folder_acl) ... ok
+test_12_owner_protection_and_revocation (test_system.NetworkTests.test_12_owner_protection_and_revocation) ... ok
+test_13_upload_notifications (test_system.NetworkTests.test_13_upload_notifications) ... ok
+test_14_deletion_notifications (test_system.NetworkTests.test_14_deletion_notifications) ... ok
+test_15_actual_byte_progress (test_system.NetworkTests.test_15_actual_byte_progress) ... ok
+test_16_invalid_input_command (test_system.NetworkTests.test_16_invalid_input_command) ... ok
+test_17_missing_file_folder (test_system.NetworkTests.test_17_missing_file_folder) ... ok
+test_18_disconnect_and_relogin (test_system.NetworkTests.test_18_disconnect_and_relogin) ... ok
+test_19_simultaneous_duplicate_upload (test_system.NetworkTests.test_19_simultaneous_duplicate_upload) ... ok
+test_20_simultaneous_folder_creation (test_system.NetworkTests.test_20_simultaneous_folder_creation) ... ok
+test_21_interrupted_upload_cleanup (test_system.NetworkTests.test_21_interrupted_upload_cleanup) ... ok
+test_22_interrupted_download_cleanup (test_system.NetworkTests.test_22_interrupted_download_cleanup) ... ok
+test_23_path_traversal (test_system.NetworkTests.test_23_path_traversal) ... ok
+test_24_logging_no_password_leaks (test_system.NetworkTests.test_24_logging_no_password_leaks) ... ok
+test_25_configuration (test_system.NetworkTests.test_25_configuration) ... ok
+test_26_empty_nonempty_protected_folder_deletion (test_system.NetworkTests.test_26_empty_nonempty_protected_folder_deletion) ... ok
+test_27_authentication_and_hashes (test_system.NetworkTests.test_27_authentication_and_hashes) ... ok
+test_28_checksum_failure (test_system.NetworkTests.test_28_checksum_failure) ... ok
+test_29_empty_file_transfer (test_system.NetworkTests.test_29_empty_file_transfer) ... ok
+test_30_private_notifications (test_system.NetworkTests.test_30_private_notifications) ... ok
+test_31_active_transfer_locks (test_system.NetworkTests.test_31_active_transfer_locks) ... ok
+test_32_malformed_frame_isolation (test_system.NetworkTests.test_32_malformed_frame_isolation) ... ok
+test_33_local_no_overwrite (test_system.NetworkTests.test_33_local_no_overwrite) ... ok
+test_34_realistic_three_user_flow (test_system.NetworkTests.test_34_realistic_three_user_flow) ... ok
+test_35_layered_passwords (test_system.NetworkTests.test_35_layered_passwords) ... ok
+test_36_invalid_chunks (test_system.NetworkTests.test_36_invalid_chunks) ... ok
+test_41_storage_error_cleanup (test_system.NetworkTests.test_41_storage_error_cleanup) ... ok
+test_42_symlink_escape_rejected (test_system.NetworkTests.test_42_symlink_escape_rejected) ... ok
+test_43_missing_local_upload_file (test_system.NetworkTests.test_43_missing_local_upload_file) ... ok
+
+----------------------------------------------------------------------
+Ran 44 tests in 24.779s
+
+OK

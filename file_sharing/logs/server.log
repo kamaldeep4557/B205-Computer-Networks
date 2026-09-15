@@ -1,0 +1,35 @@
+2026-09-15 22:21:13,333 INFO Server started on 127.0.0.1:5000; waiting for connections
+2026-09-15 22:22:28,056 INFO Client connected: ('127.0.0.1', 63409)
+2026-09-15 22:22:34,362 INFO Client connected: ('127.0.0.1', 63414)
+2026-09-15 22:22:39,448 INFO Client connected: ('127.0.0.1', 63416)
+2026-09-15 22:25:54,323 INFO Registered user=Alice
+2026-09-15 22:26:37,427 INFO Login user=Alice
+2026-09-15 22:27:31,885 WARNING Request rejected user=None op='LOGIN' code=USER_ONLINE
+2026-09-15 22:28:36,148 INFO Server started on 127.0.0.1:5000; waiting for connections
+2026-09-15 22:28:45,849 INFO Client connected: ('127.0.0.1', 63477)
+2026-09-15 22:29:00,038 WARNING Request rejected user=None op='REGISTER' code=DUPLICATE_USER
+2026-09-15 22:29:18,222 INFO Login user=Alice
+2026-09-15 22:29:30,646 INFO Client connected: ('127.0.0.1', 63483)
+2026-09-15 22:30:07,127 INFO Registered user=Bob
+2026-09-15 22:30:33,035 INFO Login user=Bob
+2026-09-15 22:30:49,759 INFO Client connected: ('127.0.0.1', 63499)
+2026-09-15 22:31:10,238 INFO Registered user=Charlie
+2026-09-15 22:31:32,109 INFO Login user=Charlie
+2026-09-15 22:38:20,022 INFO Folder created user=Alice path=Documents
+2026-09-15 22:41:50,601 INFO UPLOAD_START user=Alice path=Documents/report.txt size=345
+2026-09-15 22:41:50,607 INFO Transfer closed user=Alice mode=upload bytes=345
+2026-09-15 22:41:50,607 INFO UPLOAD_COMPLETE user=Alice path=Documents/report.txt
+2026-09-15 22:45:05,130 INFO DOWNLOAD_START user=Alice path=Documents/report.txt
+2026-09-15 22:45:05,131 INFO Transfer closed user=Alice mode=download bytes=345
+2026-09-15 22:45:05,132 INFO DOWNLOAD_COMPLETE user=Alice
+2026-09-15 22:51:36,189 INFO DOWNLOAD_START user=Bob path=Documents/report.txt
+2026-09-15 22:51:36,191 INFO Transfer closed user=Bob mode=download bytes=345
+2026-09-15 22:51:36,192 INFO DOWNLOAD_COMPLETE user=Bob
+2026-09-15 22:53:58,491 INFO PROTECT user=Alice
+2026-09-15 22:55:37,344 WARNING Request rejected user=Bob op='LIST' code=ACCESS_DENIED
+2026-09-15 22:56:45,002 INFO ACCESS user=Bob
+2026-09-15 22:59:34,827 WARNING Request rejected user=Charlie op='LIST' code=ACCESS_DENIED
+2026-09-15 23:01:36,628 INFO ACCESS user=Charlie
+2026-09-15 23:09:12,944 INFO Folder created user=Charlie path=Documents/University/Networks
+2026-09-15 23:10:23,308 WARNING Request rejected user=Charlie op='CREATE_FOLDER' code=DUPLICATE_NAME
+2026-09-15 23:12:25,847 INFO DELETE_FILE user=Bob path=Documents/report.txt
